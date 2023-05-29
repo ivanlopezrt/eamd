@@ -22,4 +22,3 @@ def blocked_chatgpt():
     api.close()
 
 
-print(blocked_chatgpt())
