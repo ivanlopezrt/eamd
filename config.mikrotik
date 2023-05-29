@@ -1,3 +1,4 @@
+
 #rules for the blocked domains list
 add address=104.18.2.161 list=chatgpt3
 add address=104.18.3.161 list=chatgpt3
