@@ -15,7 +15,7 @@ def blocked_chatgpt():
     comment= Key('comment')
 
     for row in api.path('/ip/firewall/raw').select(name, disabled,chain,comment).where(comment=='chatgpt3'):
-        return row['disabled']
+        return not row['disabled']
 
     raise Exception('La regla chatgpt3 no está definida para este aula')
 
