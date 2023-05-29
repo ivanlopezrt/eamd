@@ -2,9 +2,9 @@
   "credentials": [
     {
       "name": "classroom b21",
-      "IP address": "192.168.21.1",
-      "user name": "gftftft",
-      "password": "hgggg"
+      "IP": "192.168.1.1",
+      "user": "admin",
+      "password": "ilm2017.dpm"
     }
   ]
 }

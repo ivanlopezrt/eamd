@@ -4,8 +4,10 @@ import json
 
 def blocked_chatgpt():
     myJSON = json.load(open('mydata.json'))
+    myJSON=myJSON['credentials'][0]
+    print(myJSON)
 
-    api = lr.connect(username=myJSON['user'], password='ilm2017.dpm', host='192.168.1.1')
+    api = lr.connect(username=myJSON['user'], password=myJSON['password'], host=myJSON['IP'])
     print(api.path())
     name = Key('src-address-list')
     disabled = Key('disabled')
