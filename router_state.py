@@ -22,3 +22,6 @@ def blocked_chatgpt():
     api.close()
 
 
+def blocked(what='chatgpt3'):
+    myJSON = json.load(open('mydata.json'))
+    myJSON=myJSON['credentials'][0]
