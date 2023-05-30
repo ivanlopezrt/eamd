@@ -3,7 +3,7 @@ from librouteros.query import Key
 import json
 
 
-def block(what='chatgpt3'):
+def change_state(what='chatgpt3',blocked=True):
     print('blocking '+what)
     myJSON = json.load(open('mydata.json'))
     myJSON = myJSON['credentials'][0]
@@ -20,7 +20,7 @@ def block(what='chatgpt3'):
         id=Key('.id')
         exists_rule=False
         for row in api.path('/ip/firewall/raw').select(name,  disabled, chain, comment,id ).where(comment == what):
-            params={'.id':row['.id'], 'disabled':False}
+            params={'.id':row['.id'], 'disabled':not blocked}
             api.path('/ip/firewall/raw').update(**params)
             print('blocked '+what)
             exists_rule=True
