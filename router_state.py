@@ -4,7 +4,6 @@ import json
 
 
 def change_state(what='chatgpt3',blocked=True):
-    print('blocking '+what)
     myJSON = json.load(open('mydata.json'))
     myJSON = myJSON['credentials'][0]
 
@@ -22,7 +21,7 @@ def change_state(what='chatgpt3',blocked=True):
         for row in api.path('/ip/firewall/raw').select(name,  disabled, chain, comment,id ).where(comment == what):
             params={'.id':row['.id'], 'disabled':not blocked}
             api.path('/ip/firewall/raw').update(**params)
-            print('blocked '+what)
+            print(what+".blocked="+str(blocked))
             exists_rule=True
 
         if not exists_rule:
