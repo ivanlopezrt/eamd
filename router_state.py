@@ -17,10 +17,11 @@ def block(what='chatgpt3'):
         disabled = Key('disabled')
         chain = Key('chain')
         comment = Key('comment')
-
+        id=Key('.id')
         exists_rule=False
         for row in api.path('/ip/firewall/raw').select(name,  disabled, chain, comment).where(comment == what):
-            api.path('/ip/firewall/raw').update(disabled='no')
+            params={'.id':row['.id'], 'disabled':True}
+            api.path('/ip/firewall/raw').update(params)
             print('blocked '+what)
             exists_rule=True
 

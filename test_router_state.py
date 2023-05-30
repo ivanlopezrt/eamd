@@ -6,3 +6,4 @@ if router_state.isBlocked( what='chatgpt3'):
 else:
     router_state.block(what='chatgpt3')
 
+router_state.block(what='chatgpt3')
