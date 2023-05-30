@@ -7,10 +7,10 @@ import router_state
 #2. Exception -> could not connect to router
 
 try:
-    if router_state.isBlocked( what='kjdsfhfsdkj'):
+    if router_state.isBlocked( what='chatgpt3'):
         print("ChatGPT is blocked")
     else:
-        router_state.change_state(what='sdmjgfsdkfj',blocked=True)
+        router_state.change_state(what='chatgpt3',blocked=True)
 
 except router_state.InexistingRuleException as e:
     print("Exception: "+str(e))
