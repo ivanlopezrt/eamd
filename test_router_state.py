@@ -1,9 +1,18 @@
 import router_state
 
+#example for Tania
 
-if router_state.isBlocked( what='chatgpt3'):
-    print("ChatGPT is blocked")
-else:
-    router_state.block(what='chatgpt3')
+#now two possible exceptions:
+#1. InexistingRuleException -> did connect to router, but rule does not exist
+#2. Exception -> could not connect to router
 
-router_state.block(what='chatgpt3')
+try:
+    if router_state.isBlocked( what='kjdsfhfsdkj'):
+        print("ChatGPT is blocked")
+    else:
+        router_state.change_state(what='sdmjgfsdkfj',blocked=True)
+
+except router_state.InexistingRuleException as e:
+    print("Exception: "+str(e))
+except Exception as e:
+    print("Error connecting to router: Exception: "+str(e))
