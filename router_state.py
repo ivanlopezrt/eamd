@@ -4,6 +4,7 @@ import json
 
 
 def block(what='chatgpt3'):
+    print('blocking '+what)
     myJSON = json.load(open('mydata.json'))
     myJSON = myJSON['credentials'][0]
 
@@ -16,10 +17,12 @@ def block(what='chatgpt3'):
         disabled = Key('disabled')
         chain = Key('chain')
         comment = Key('comment')
-        exists_rule=false
-        for row in api.path('/ip/firewall/raw').select(name, disabled, chain, comment).where(comment == what):
-            api.path('/ip/firewall/raw').update(row['.id'], disabled='no')
-            exists_rule=true
+
+        exists_rule=False
+        for row in api.path('/ip/firewall/raw').select(name,  disabled, chain, comment).where(comment == what):
+            api.path('/ip/firewall/raw').update(disabled='no')
+            print('blocked '+what)
+            exists_rule=True
 
         if not exists_rule:
             raise Exception('La regla '+what+' no está definida para este aula')
