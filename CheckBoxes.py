@@ -21,33 +21,28 @@ def stop_block_internet():
     myJSON = json.load(open('mydata.json'))
     myJSON = myJSON['credentials'][0]
 
-
-
+def router_status():
+    if router_state.isBlocked(what='chatgpt3'):
+        return "ChatGPT is blocked"
+    else:
+        router_state.block(what='chatgpt3')
+        return "ChatGPT is now blocked"
 
 # Create the main window
 window = tk.Tk()
 window.title("Internet Blocker")
+window.geometry("400x300")  # Set the initial window size
 
 # Create checkboxes
-try:
-    var_chatgpt = tk.IntVar()
-    var_chatgpt.set(router_state.isBlocked(what='chatgpt3'))
-    chk_chatgpt = tk.Checkbutton(window, text="Block ChatGPT", variable=var_chatgpt)
-except router_state.InexistingRuleException as e:
-    print("Exception: "+str(e))
-except Exception as e:
-    print("Error connecting to router: Exception: "+str(e))
-
-
+var_chatgpt = tk.IntVar()
+chk_chatgpt = tk.Checkbutton(window, text="Block ChatGPT", variable=var_chatgpt)
 chk_chatgpt.pack(anchor=tk.W)
 
 var_stackoverflow = tk.IntVar()
-var_stackoverflow.set(router_state.isBlocked(what='stackoverflow'))
 chk_stackoverflow = tk.Checkbutton(window, text="Block stackoverflow", variable=var_stackoverflow)
 chk_stackoverflow.pack(anchor=tk.W)
 
 var_github = tk.IntVar()
-var_github.set(router_state.isBlocked(what='github'))
 chk_github = tk.Checkbutton(window, text="Block github", variable=var_github)
 chk_github.pack(anchor=tk.W)
 
@@ -62,17 +57,11 @@ btn_block_internet.pack(pady=10)
 btn_stop_block_internet = tk.Button(window, text="Stop Block Internet", command=stop_block_internet, height=3, width=20)
 btn_stop_block_internet.pack()
 
-# Create status label
-try:
-    lbl_status = tk.Label(window, text=router_status())
-    lbl_status.pack()
-except router_state.InexistingRuleException:
-    lbl_status = tk.Label(window, text="The rule does not exist")
-    lbl_status.pack()
-except Exception as e:
-    lbl_status = tk.Label(window, text=str(e))
-    lbl_status.pack()
 
+
+# Create exceptions textbox
+txt_exceptions = tk.Text(window, height=5)
+txt_exceptions.pack(fill=tk.BOTH, expand=True)
 
 
 # Save settings when the window is closed
