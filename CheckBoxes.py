@@ -2,6 +2,12 @@ import tkinter as tk
 import json
 import router_state
 
+#TODO:
+#1- call change_state when checkbox is clicked
+#2- exit program when window is closed
+#3- add change state of router when button is clicked (with Ivan)
+
+
 def save_settings():
     settings = {
         "Block ChatGPT": var_chatgpt.get(),
@@ -21,6 +27,16 @@ def change_internet_state():
         btn_block_internet["text"] = "Block Internet"
 
 def refresh_state():
+    try:
+        var_chatgpt.set(router_state.isBlocked(what="chatgpt3"))
+        var_stackoverflow.set(router_state.isBlocked(what="stackoverflow"))
+        var_github.set(router_state.isBlocked(what="github"))
+        var_streaming.set(router_state.isBlocked(what="streaming"))
+    except router_state.InexistingRuleException as e:
+        print("Exception: " + str(e))
+    except Exception as e:
+        print("Error connecting to router: Exception: " + str(e))
+        isConnected = False
     # Refresh state logic here
     pass
 
