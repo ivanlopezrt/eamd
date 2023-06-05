@@ -12,14 +12,17 @@ def save_settings():
     with open("settings.json", "w") as file:
         json.dump(settings, file)
 
-def block_internet():
-    myJSON = json.load(open('mydata.json'))
-    myJSON = myJSON['credentials'][0]
+def change_internet_state():
+    if btn_block_internet["text"] == "Block Internet":
+        # Block internet logic here
+        btn_block_internet["text"] = "Unblock Internet"
+    else:
+        # Unblock internet logic here
+        btn_block_internet["text"] = "Block Internet"
 
-
-def stop_block_internet():
-    myJSON = json.load(open('mydata.json'))
-    myJSON = myJSON['credentials'][0]
+def refresh_state():
+    # Refresh state logic here
+    pass
 
 
 # Create the main window
@@ -73,11 +76,12 @@ if isConnected:
         print("Error connecting to router: Exception: "+str(e))
 
 # Create buttons
-btn_block_internet = tk.Button(window, text="Block Internet", command=block_internet, height=3, width=20)
+btn_block_internet = tk.Button(window, text="Block Internet", command=change_internet_state, height=3, width=20)
 btn_block_internet.pack(pady=10)
 
-btn_stop_block_internet = tk.Button(window, text="Stop Block Internet", command=stop_block_internet, height=3, width=20)
-btn_stop_block_internet.pack()
+btn_refresh = tk.Button(window, text="Refresh", command=refresh_state, height=3, width=20)
+btn_refresh.pack(pady=10)
+
 
 
 
