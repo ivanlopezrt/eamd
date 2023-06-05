@@ -21,34 +21,56 @@ def stop_block_internet():
     myJSON = json.load(open('mydata.json'))
     myJSON = myJSON['credentials'][0]
 
-def router_status():
-    if router_state.isBlocked(what='chatgpt3'):
-        return "ChatGPT is blocked"
-    else:
-        router_state.block(what='chatgpt3')
-        return "ChatGPT is now blocked"
 
 # Create the main window
 window = tk.Tk()
 window.title("Internet Blocker")
 window.geometry("400x300")  # Set the initial window size
 
+isConnected=True
+
 # Create checkboxes
-var_chatgpt = tk.IntVar()
-chk_chatgpt = tk.Checkbutton(window, text="Block ChatGPT", variable=var_chatgpt)
-chk_chatgpt.pack(anchor=tk.W)
+try:
+    var_chatgpt = tk.IntVar()
+    var_chatgpt.set(router_state.isBlocked(what="chatgpt3"))
+    chk_chatgpt = tk.Checkbutton(window, text="Block ChatGPT", variable=var_chatgpt)
+    chk_chatgpt.pack(anchor=tk.W)
+except router_state.InexistingRuleException as e:
+    print("Exception: "+str(e))
+except Exception as e:
+    print("Error connecting to router: Exception: "+str(e))
+    isConnected=False
 
-var_stackoverflow = tk.IntVar()
-chk_stackoverflow = tk.Checkbutton(window, text="Block stackoverflow", variable=var_stackoverflow)
-chk_stackoverflow.pack(anchor=tk.W)
+if isConnected:
+    try:
+        var_stackoverflow = tk.IntVar()
+        var_stackoverflow.set(router_state.isBlocked(what="stackoverflow"))
+        chk_stackoverflow = tk.Checkbutton(window, text="Block stackoverflow", variable=var_stackoverflow)
+        chk_stackoverflow.pack(anchor=tk.W)
+    except router_state.InexistingRuleException as e:
+        print("Exception: "+str(e))
+    except Exception as e:
+        print("Error connecting to router: Exception: "+str(e))
 
-var_github = tk.IntVar()
-chk_github = tk.Checkbutton(window, text="Block github", variable=var_github)
-chk_github.pack(anchor=tk.W)
+    try:
+        var_github = tk.IntVar()
+        var_github.set(router_state.isBlocked(what="github"))
+        chk_github = tk.Checkbutton(window, text="Block github", variable=var_github)
+        chk_github.pack(anchor=tk.W)
+    except router_state.InexistingRuleException as e:
+        print("Exception: "+str(e))
+    except Exception as e:
+        print("Error connecting to router: Exception: "+str(e))
 
-var_streaming = tk.IntVar()
-chk_streaming = tk.Checkbutton(window, text="Block streaming platforms", variable=var_streaming)
-chk_streaming.pack(anchor=tk.W)
+    try:
+        var_streaming = tk.IntVar()
+        var_streaming.set(router_state.isBlocked(what="streaming"))
+        chk_streaming = tk.Checkbutton(window, text="Block streaming platforms", variable=var_streaming)
+        chk_streaming.pack(anchor=tk.W)
+    except router_state.InexistingRuleException as e:
+        print("Exception: "+str(e))
+    except Exception as e:
+        print("Error connecting to router: Exception: "+str(e))
 
 # Create buttons
 btn_block_internet = tk.Button(window, text="Block Internet", command=block_internet, height=3, width=20)

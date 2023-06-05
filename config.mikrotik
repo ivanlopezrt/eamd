@@ -9,7 +9,7 @@ add address=151.101.1.69 list=stackoverflow
 add address=151.101.193.69 list=stackoverflow
 add address=151.101.65.69 list=stackoverflow
 
-add action=drop chain=prerouting comment=chatgpt3 src-address-list=chatgpt3
-add action=drop chain=prerouting comment=chatgpt3 src-address-list=github
-add action=drop chain=prerouting comment=chatgpt3 src-address-list=stackoverflow
+add action=drop chain=prerouting comment=chatgpt3 src-address-list=chatgpt3 disabled=yes
+add action=drop chain=prerouting comment=github src-address-list=github disabled=yes
+add action=drop chain=prerouting comment=stackoverflow src-address-list=stackoverflow disabled=yes
 

@@ -12,7 +12,7 @@ def change_state(what='chatgpt3',blocked=True):
     myJSON = myJSON['credentials'][0]
 
 
-    api = lr.connect(username=myJSON['user'], password=myJSON['password'], host=myJSON['IP'])
+    api = lr.connect(username=myJSON['user'], password=myJSON['password'], host=myJSON['IP'],timeout=100)
     name = Key('src-address-list')
     disabled = Key('disabled')
     chain = Key('chain')
@@ -36,7 +36,7 @@ def isBlocked(what='chatgpt3'):
     myJSON=myJSON['credentials'][0]
 
 
-    api = lr.connect(username=myJSON['user'], password=myJSON['password'], host=myJSON['IP'])
+    api = lr.connect(username=myJSON['user'], password=myJSON['password'], host=myJSON['IP'],timeout=100)
     name = Key('src-address-list')
     disabled = Key('disabled')
     chain = Key('chain')
