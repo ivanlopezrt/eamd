@@ -26,6 +26,8 @@ def change_internet_state():
         # Unblock internet logic here
         btn_block_internet["text"] = "Block Internet"
 
+
+
 def refresh_state():
     try:
         var_chatgpt.set(router_state.isBlocked(what="chatgpt3"))
@@ -52,7 +54,8 @@ isConnected=True
 try:
     var_chatgpt = tk.IntVar()
     var_chatgpt.set(router_state.isBlocked(what="chatgpt3"))
-    chk_chatgpt = tk.Checkbutton(window, text="Block ChatGPT", variable=var_chatgpt)
+    chk_chatgpt = tk.Checkbutton(window, text="Block ChatGPT", variable=var_chatgpt, command=change_internet_state)
+
     chk_chatgpt.pack(anchor=tk.W)
 except router_state.InexistingRuleException as e:
     print("Exception: "+str(e))
@@ -64,7 +67,8 @@ if isConnected:
     try:
         var_stackoverflow = tk.IntVar()
         var_stackoverflow.set(router_state.isBlocked(what="stackoverflow"))
-        chk_stackoverflow = tk.Checkbutton(window, text="Block stackoverflow", variable=var_stackoverflow)
+        chk_chatgpt = tk.Checkbutton(window, text="Block stackoveflow", variable=var_stackoverflow, command=change_internet_state)
+
         chk_stackoverflow.pack(anchor=tk.W)
     except router_state.InexistingRuleException as e:
         print("Exception: "+str(e))
@@ -74,7 +78,8 @@ if isConnected:
     try:
         var_github = tk.IntVar()
         var_github.set(router_state.isBlocked(what="github"))
-        chk_github = tk.Checkbutton(window, text="Block github", variable=var_github)
+        chk_chatgpt = tk.Checkbutton(window, text="Block github", variable=var_github, command=change_internet_state)
+
         chk_github.pack(anchor=tk.W)
     except router_state.InexistingRuleException as e:
         print("Exception: "+str(e))
@@ -84,7 +89,9 @@ if isConnected:
     try:
         var_streaming = tk.IntVar()
         var_streaming.set(router_state.isBlocked(what="streaming"))
-        chk_streaming = tk.Checkbutton(window, text="Block streaming platforms", variable=var_streaming)
+        chk_streaming = tk.Checkbutton(window, text="Block streaming platforms", variable=var_streaming, command=change_internet_state)
+
+
         chk_streaming.pack(anchor=tk.W)
     except router_state.InexistingRuleException as e:
         print("Exception: "+str(e))
@@ -108,6 +115,8 @@ txt_exceptions.pack(fill=tk.BOTH, expand=True)
 
 # Save settings when the window is closed
 window.protocol("WM_DELETE_WINDOW", save_settings)
+window.protocol("WM_DELETE_WINDOW", window.quit)
+
 
 # Start the main event loop
 window.mainloop()
