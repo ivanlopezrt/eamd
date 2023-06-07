@@ -2,12 +2,6 @@ import tkinter as tk
 import json
 import router_state
 
-#TODO:
-#1- call change_state when checkbox is clicked
-#2- exit program when window is closed
-#3- add change state of router when button is clicked (with Ivan)
-
-
 def save_settings():
     settings = {
         "Block ChatGPT": var_chatgpt.get(),
